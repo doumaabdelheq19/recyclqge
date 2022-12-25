@@ -1,0 +1,344 @@
+<?php 
+  include 'auth.php';
+  error_reporting(E_ALL ^ E_WARNING); 
+  
+     
+  
+  
+  
+  
+  ?>
+
+<html>
+<head>
+	<title>Add product</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+	<!--===============================================================================================-->
+	
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+	<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+	
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="en.php" method="post" enctype="multipart/form-data">
+				<span class="contact100-form-title">
+					Add a Product
+				</span>
+  
+				<?php
+
+$conn = mysqli_connect('localhost','root','','auth_php');
+        if(!$conn){
+            die("Error" .mysqli_connect_error());
+         }
+        $sql = "SELECT * FROM prodad";
+
+$result = mysqli_query($conn,$sql);
+$files= mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+ if(isset($_POST['submit'])){
+       $filename=$_FILES['myfile']['name'];
+	   $filename1=$_FILES['myfile1']['name'];
+	   $filename2=$_FILES['myfile2']['name'];
+	   $filename3=$_FILES['myfile3']['name'];
+	   $filename4=$_FILES['myfile4']['name'];
+	   $filename5=$_FILES['myfile5']['name'];
+      
+       $destination='uploads/'  .$filename;
+	   $destination1='uploads/'  .$filename1;
+	   $destination2='uploads/'  .$filename2;
+	   $destination3='uploads/'  .$filename3;
+	   $destination4='uploads/'  .$filename4;
+	   $destination5='uploads/'  .$filename5;
+       $timestamp1= date('d-m-y h:i:s');
+$seller=$_POST['seller'];
+
+$phone=$_POST['phone'];
+$email=$_POST['email'];
+$adress=$_POST['adresse'];
+$catego=$_POST['categories'];
+$city=$_POST['pays'];
+$title=$_POST['pron'];
+$desc=$_POST['desc'];
+$date=$_POST['purchase_date'];
+$price=$_POST['price'];
+$amount=$_POST['amount'];
+
+
+       $extension = pathinfo($filename,PATHINFO_EXTENSION);
+	   $extension = pathinfo($filename1,PATHINFO_EXTENSION);
+	   $extension = pathinfo($filename2,PATHINFO_EXTENSION);
+	   $extension = pathinfo($filename3,PATHINFO_EXTENSION);
+	   $extension = pathinfo($filename4,PATHINFO_EXTENSION);
+	   $extension = pathinfo($filename5,PATHINFO_EXTENSION);
+
+
+       $file = $_FILES['myfile']['tmp_name'];
+	   $file1 = $_FILES['myfile1']['tmp_name'];
+	   $file2= $_FILES['myfile2']['tmp_name'];
+	   $file3 = $_FILES['myfile3']['tmp_name'];
+	   $file4 = $_FILES['myfile4']['tmp_name'];
+	   $file5 = $_FILES['myfile5']['tmp_name'];
+	
+       $size = $_FILES['myfile']['size'];
+
+       if(move_uploaded_file($file,$destination)){
+		                if (move_uploaded_file($file1, $destination1)) {
+							if (move_uploaded_file($file2, $destination2)) {
+								if (move_uploaded_file($file3, $destination3)) {
+									if (move_uploaded_file($file4, $destination4)) {
+										if (move_uploaded_file($file5, $destination5)) {
+											$sqlp = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,filen1,filen2,filen3,filen4,filen5,categorie,amount,nbr)
+											VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price','$filename','$filename1','$filename2','$filename3','$filename4','$filename5','$catego','$amount','6')
+											";
+								 
+											if (mysqli_query($conn,$sqlp)){
+												echo "file uploaded succe";
+											}
+											else {
+												echo"failed";
+											}
+										}else {
+											$sqlp = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,filen1,filen2,filen3,filen4,categorie,amount,nbr)
+											VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price','$filename','$filename1','$filename2','$filename3','$filename4','$catego','$amount','5')
+											";
+								 
+											if (mysqli_query($conn,$sqlp)){
+												echo "file uploaded succe";
+											}
+											else {
+												echo"failed";
+											}
+										}
+									}else {
+										$sqlp = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,filen1,filen2,filen3,categorie,amount,nbr)
+										VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price','$filename','$filename1','$filename2','$filename3','$catego','$amount','4')
+										";
+							 
+										if (mysqli_query($conn,$sqlp)){
+											echo "file uploaded succe";
+										}
+										else {
+											echo"failed";
+										}
+									}
+								}else {
+									$sqlp = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,filen1,filen2,categorie,amount,nbr)
+									VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price','$filename','$filename1','$filename2','$catego','$amount','3')
+									";
+						 
+									if (mysqli_query($conn,$sqlp)){
+										echo "file uploaded succe";
+									}
+									else {
+										echo"failed";
+									}
+								}
+							}else {
+								$sqlp = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,filen1,categorie,amount,nbr)
+								VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price','$filename','$filename1','$catego','$amount','2')
+								";
+					 
+								if (mysqli_query($conn,$sqlp)){
+									echo "file uploaded succe";
+								}
+								else {
+									echo"failed";
+								}
+							}
+		                }else {
+							$sqll = "INSERT INTO prodad (name,phone,email,addr,city,prod_name,descp,price,filen,categorie,amount,nbr)
+							VALUES('$seller','$phone','$email','$adress','$city','$title','$desc','$price',' $filename','$catego','$amount','1')
+							";
+				 
+							if (mysqli_query($conn,$sqll)){
+								echo "file uploaded succe";
+							}
+							else {
+								echo"failed";
+							}
+						}
+           
+       }
+   }
+
+
+
+       ?>
+
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Your seller's Name">
+					<span class="label-input100">seller's Name *</span>
+					<input class="input100" type="text" name="seller" placeholder="seller's name">
+				</div>
+
+			
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Your phone number">
+					<span class="label-input100">Your phone number *</span>
+					<input class="input100" type="text" name="phone" placeholder="Enter your phone number">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Enter Your Email (e@a.x)">
+					<span class="label-input100">Your mail *</span>
+					<input class="input100" type="text" name="email" placeholder="Enter your mail">
+				</div>
+
+			
+
+				
+				
+
+				
+
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Select your city</span>
+					<div>
+						<select class="js-select2" name="pays">
+							<option value="Adrar">Adrar</option>
+							<option value="Chlef">Chlef</option>
+							<option value="Laghouat">Laghouat</option>
+							<option value="Oum El Bouaghi">Oum El Bouaghi</option>
+							<option value="Batna">Batna</option>
+							<option value="Béjaia">Béjaia</option>
+							<option value="Biskra">Biskra</option>
+							<option value="Bechar">Bechar</option>
+							<option value="Blida">Blida</option>
+							<option value="Bouira">Bouira</option>
+							<option value="Tamanrasset">Tamanrasset</option>
+							<option value="Tebessa">Tebessa</option>
+							<option value="Tlemcen">Tlemcen</option>
+							<option value="Tiaret">Tiaret</option>
+							<option value="Tizi Ouzou">Tizi Ouzou</option>
+							<option value="Algiers">Algiers</option>
+							<option value="Djelfa">Djelfa</option>
+							<option value="jijel">jijel</option>
+							<option value="Sétif">Sétif</option>
+							<option value="Saida">Saida</option>
+							<option value="Skikda">Skikda</option>
+							<option value="Sid Bel Abbes">Sid Bel Abbes</option>
+							<option value="Annaba">Annaba</option>
+							<option value="Guelma">Guelma</option>
+							<option value="Constantine">Constantine</option>
+							<option value="Médéa">Médéa</option>
+							<option value="Mostaganem">Mostaganem</option>
+							<option value="M'sila">M'sila</option>
+							<option value="Mascara">Mascara</option>
+							<option value="Ouargla">Ouargla</option>
+							<option value="Oran">Oran</option>
+							<option value="El Bayadh">El Bayadh</option>
+							<option value="Illizi">Illizi</option>
+							<option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
+							<option value="Boumerdes">Boumerdes</option>
+							<option value="El Tarf">El Tarf</option>
+							<option value="Tindouf">Tindouf</option>
+							<option value="Tissemsilt">Tissemsilt</option>
+							<option value="El oued">El oued</option>
+							<option value="Khenchela">Khenchela</option>
+							<option value="Souk Ahras">Souk Ahras</option>
+							<option value="Tipaza">Tipaza</option>
+
+							<option value="Mila">Mila</option>
+							<option value="Ain Defla">Ain Defla</option>
+							<option value="Naama">Naama</option>
+							<option value="Ain Temouchent">Ain Temouchent</option>
+							<option value="Ghardaia">Ghardaia</option>
+							<option value="Relizane">Relizane</option>
+							<option value="El M'Ghair">El M'Ghair</option>
+							<option value="El Menia">El Menia</option>
+							<option value="Ouled Djellal">Ouled Djellal</option>
+							<option value="Bordj Baji Mokhtar">Bordj Baji Mokhtar</option>
+							<option value="Béni Abbés">Béni Abbés</option>
+							<option value="Timimoun">Timimoun</option>
+							<option value="Touggourt">Touggourt</option>
+							<option value="Djanet">Djanet</option>
+							<option value="In Salah">In Salah</option>
+							<option value="In Guezzam">In Guezzam</option>
+							
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Categories</span>
+					<div>
+						<select class="js-select2" name="categories">
+							<option value="Wasted paper">Wasted paper</option>
+							<option value="chimical substances">chimical substances</option>
+							<option value="Plastic Recycling">Plastic Recycling</option>
+							<option value="Metal Recycling">Metal Recycling</option>
+							<option value="Electronics Recycling">Electronics Recycling</option>
+							<option value="Wood Recycling">Wood Recycling</option>
+							<option value="Glass Recycling">Glass Recycling</option>
+							<option value="Cloth and textile">Cloth and textile</option>
+							<option value="others">others</option>
+							
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="entrez le prix">
+					<span class="label-input100">Name Your Product *</span>
+					<input class="input100" type="text" name="pron" placeholder="Name of Product">
+				</div>
+				<div class="wrap-input100 validate-input bg1" data-validate="entrez le prix">
+					<span class="label-input100">Descripe Your Product *</span>
+					<input class="input100" type="text" name="desc" placeholder="Description of Product">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="entrez le prix">
+					<span class="label-input100">images *</span>
+					<br>	
+					
+        <input id="file" class="inpu-file" type="file" name="myfile" >
+		<input id="file" class="inpu-file" type="file" name="myfile1" >
+		<input id="file" class="inpu-file" type="file" name="myfile2" >
+		<input id="file" class="inpu-file" type="file" name="myfile3" >
+		<input id="file" class="inpu-file" type="file" name="myfile4" >
+		<input id="file" class="inpu-file" type="file" name="myfile5" >
+				</div>
+
+			
+
+				<div class="wrap-input100 validate-input bg1" data-validate="entrez le prix">
+					<span class="label-input100">price *</span>
+					<input class="input100" type="text" name="price" placeholder="Price Da ">
+				</div>
+				<div class="wrap-input100 validate-input bg1" data-validate="enter your amount">
+					<span class="label-input100">Amount *</span>
+					<input class="input100" type="text" name="amount" placeholder="Amount Kg ">
+				</div>
+
+			
+
+				<div class="container-contact100-form-btn">
+					<input class="contact100-form-btn" type="submit" name="submit">
+						<span>
+							
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>New</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+ 
+</head>
+<body>
+
+<div id="screen">
+
+  <div id="content">
+    <div class="form-container">
+      <form id="form" action="" method="POST" enctype="multipart/form-data">
+        <span class="hint">Fields marked “*” are required</span>
+       
+        <div class="form-left">
+          <label for="user_name">Name *</label>
+          <input id="user_name" type="text" name="user_name" value="" placeholder="Abdelheq" />
+        </div>
+        <div class="form-right">
+          <label for="email">Email *</label>
+          <input id="email" type="text" name="email" value="" placeholder="Abdelheq@gmail.com" />
+        </div>
+        <div class="clear"></div>
+        <label for="subject">Subject *</label>
+        <input id="subject" type="text" name="subject" value="" />
+        <label for="description">Description * <span id="descr_length">(<span id="descr_cnt">0</span>/1000)</span></label>
+        <textarea id="description" name="description"></textarea>
+        <label for="file" class="label-file">Choisir une image</label>
+        <input id="file" class="input-file" type="file" style="display: none;">
+      <button id="submit_form" class="btn-default form-submit"  >Submit</button>
+    </form>
+  </div>
+ 
+</div>
+
+</body>
+</html>

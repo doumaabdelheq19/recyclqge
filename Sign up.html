@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      
+      href=""
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="text-content">
+        <h1>Sign up</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae animi impedit! Iusto incidunt architecto illum, facilis qui maxime ipsa quos aspernatur molestias, expedita repellat voluptatem explicabo sunt autem esse.
+        </p>
+      </div>
+
+      <div class="card card-holder">
+        <button class="card card-offers">
+          <span>Do you have an Account ?</span> <a> Sign in</a>
+        </button>
+        <div class="card card-form">
+          <form action="Registration.php" method="post" >
+            <input type="text" id="first-Name" name="fname" placeholder="First Name" />
+            <p class="first-Name--errorText">First name cannot be empty</p>
+
+            <input type="text" id="last-name" name="lname" placeholder="Last Name" />
+            <p class="last-name--errorText">Last name cannot be empty</p>
+
+            <input type="text" id="email" name="email" placeholder="Email Address" />
+            <p class="email--errorText">Looks like this is not an email</p>
+
+            <input type="password" id="password" name="password" placeholder="Password" />
+            <p class="password--errorText">
+              Password does not meet requirements
+            </p>
+            <input type="password" id="passwordcon" name="confirm-password" placeholder="Confirm your Password" />
+            <p class="password--errorText">
+              Password does not meet requirements
+            </p>
+
+            <input type="submit" name="submit" style="background-color: green; Color: white ;">Create your account</input>
+          </form>
+          <p>
+            By clicking the button, you are agreeing to our
+            <a href="#">Terms and Services</a>
+          </p>
+        </div>
+      </div>
+
+    
+    </main>
+
+   
+  </body>
+</html>
